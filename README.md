@@ -17,3 +17,9 @@ https://catfact.ninja/fact
 ```
 https://cataas.com/cat/says/hello
 ```
+
+## Steps
+
+1. Fetch an random fact about cats from the first API
+2. Recover the first word of the previous fact
+3. Show an cat image using the recovered first word
