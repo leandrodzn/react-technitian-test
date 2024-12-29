@@ -2,17 +2,17 @@
 
 ## Statement
 
-Fetch an random fact about cats and show an cat image using the first word of the fact.
+Fetch an random fact about cats from the first API below and show an cat image using the first word of the fact using the second API.
 
 ## APIs
 
-- Random Facts:
+1. Random Facts:
 
 ```
 https://catfact.ninja/fact
 ```
 
-- Random Images:
+2. Random Images:
 
 ```
 https://cataas.com/cat/says/hello
