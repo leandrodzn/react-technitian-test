@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import './App.css'
 
 const FACT_API_ENDPOINT = 'https://catfact.ninja/fact'
 const IMAGE_API_ENDPOINT = 'https://cataas.com/cat/says/:word?width=1000'
