@@ -1,24 +1,16 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import { fetchFact } from './services/fact'
 
-const FACT_API_ENDPOINT = 'https://catfact.ninja/fact'
 const IMAGE_API_ENDPOINT = 'https://cataas.com/cat/says/:word'
 
 export function App () {
   const [fact, setFact] = useState()
   const [image, setImage] = useState()
 
-  // Fetch a random cat fact from the API
-  const fetchFact = async () => {
-    try {
-      const response = await fetch(FACT_API_ENDPOINT)
-      const data = await response.json()
-
-      const { fact } = data
-      setFact(fact)
-    } catch (error) {
-      // TODO: Handle error fact
-    }
+  const getRandomFact = async () => {
+    const fact = await fetchFact()
+    setFact(fact)
   }
 
   const recoverFirstWord = (fact) => {
@@ -41,7 +33,7 @@ export function App () {
 
   // Fetch a cat fact on component mount
   useEffect(() => {
-    fetchFact()
+    fetchFact().then(setFact)
   }, [])
 
   // Recover the first word from the fact and fetch an image
@@ -56,6 +48,7 @@ export function App () {
     <main>
       <h1>Cats App</h1>
 
+      <button onClick={getRandomFact}>Get new fact</button>
       <section>
         <article>
           <span>Cat Fact:</span>
