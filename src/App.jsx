@@ -7,9 +7,13 @@ export function App () {
 
   // Fetch a random cat fact from the API
   const fetchFact = async () => {
-    const response = await fetch(FACT_API_ENDPOINT)
-    const data = await response.json()
-    setFact(data.fact)
+    try {
+      const response = await fetch(FACT_API_ENDPOINT)
+      const data = await response.json()
+      setFact(data.fact)
+    } catch (error) {
+      setFact('')
+    }
   }
 
   // Fetch a cat fact on component mount
