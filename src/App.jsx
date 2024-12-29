@@ -37,10 +37,22 @@ export function App () {
   return (
     <main>
       <h1>Cats App</h1>
-      <span>Cat Fact:</span>
-      {fact && <p>{fact}</p>}
-      <span>Image: </span>
-      {image && <img src={image} alt={`Image extracted using the first word from ${fact}`} />}
+
+      <section>
+        <article>
+          <span>Cat Fact:</span>
+          {fact && <p>{fact}</p>}
+        </article>
+        <article>
+          <span>Image:</span>
+          {image && (
+            <img
+              src={image}
+              alt={`Image extracted using the first word from ${fact}`}
+            />
+          )}
+        </article>
+      </section>
     </main>
   )
 }
