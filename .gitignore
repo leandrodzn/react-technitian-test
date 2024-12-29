@@ -25,3 +25,7 @@ dist-ssr
 
 # OS directories
 package-lock.json
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
