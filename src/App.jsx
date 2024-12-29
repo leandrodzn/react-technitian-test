@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 const FACT_API_ENDPOINT = 'https://catfact.ninja/fact'
-const IMAGE_API_ENDPOINT = 'https://cataas.com/cat/says/:word?width=1000'
+const IMAGE_API_ENDPOINT = 'https://cataas.com/cat/says/:word'
 
 export function App () {
   const [fact, setFact] = useState()
@@ -16,23 +16,41 @@ export function App () {
 
       const { fact } = data
       setFact(fact)
-      recoverFirstWord(fact)
     } catch (error) {
-      setFact('')
+      // TODO: Handle error fact
     }
   }
 
   const recoverFirstWord = (fact) => {
     const firstWord = fact.split(' ')[0]
 
-    const imageUrl = IMAGE_API_ENDPOINT.replace(':word', firstWord)
-    setImage(imageUrl)
+    return firstWord
+  }
+
+  const fetchImage = async (word) => {
+    try {
+      const response = await fetch(IMAGE_API_ENDPOINT.replace(':word', word))
+      const data = await response.blob()
+
+      const imageUrl = URL.createObjectURL(data)
+      setImage(imageUrl)
+    } catch (error) {
+      // TODO: Handle error image
+    }
   }
 
   // Fetch a cat fact on component mount
   useEffect(() => {
     fetchFact()
   }, [])
+
+  // Recover the first word from the fact and fetch an image
+  useEffect(() => {
+    if (fact) {
+      const firstWord = recoverFirstWord(fact)
+      fetchImage(firstWord)
+    }
+  }, [fact])
 
   return (
     <main>
