@@ -15,7 +15,7 @@ https://catfact.ninja/fact
 2. Random Images:
 
 ```
-https://cataas.com/cat/says/hello
+https://cataas.com/cat/says/:word
 ```
 
 ## Steps
@@ -23,3 +23,10 @@ https://cataas.com/cat/says/hello
 1. Fetch an random fact about cats from the first API
 2. Recover the first word of the previous fact
 3. Show an cat image using the recovered first word
+
+# Endpoints to use
+
+Random Cat Images
+```
+https://cataas.com/cat/says/:word
+```
