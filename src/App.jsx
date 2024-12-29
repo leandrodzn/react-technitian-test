@@ -1,27 +1,16 @@
-import { useState, useEffect } from 'react'
 import './App.css'
-import { fetchFact } from './services/fact'
 import { useCatImage } from './hooks/useCatImage'
+import { useCatFact } from './hooks/useCatFact'
 
 export function App () {
-  const [fact, setFact] = useState()
+  const { fact, refreshFact } = useCatFact()
   const { image } = useCatImage({ fact })
-
-  const getRandomFact = async () => {
-    const fact = await fetchFact()
-    setFact(fact)
-  }
-
-  // Fetch a cat fact on component mount
-  useEffect(() => {
-    getRandomFact()
-  }, [])
 
   return (
     <main>
       <h1>Cats App</h1>
 
-      <button onClick={getRandomFact}>Get new fact</button>
+      <button onClick={refreshFact}>Get new fact</button>
       <section>
         <article>
           <span>Cat Fact:</span>
