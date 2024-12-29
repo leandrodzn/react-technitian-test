@@ -1,48 +1,21 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { fetchFact } from './services/fact'
-
-const IMAGE_API_ENDPOINT = 'https://cataas.com/cat/says/:word'
+import { useCatImage } from './hooks/useCatImage'
 
 export function App () {
   const [fact, setFact] = useState()
-  const [image, setImage] = useState()
+  const { image } = useCatImage({ fact })
 
   const getRandomFact = async () => {
     const fact = await fetchFact()
     setFact(fact)
   }
 
-  const recoverFirstWord = (fact) => {
-    const firstWord = fact.split(' ')[0]
-
-    return firstWord
-  }
-
-  const fetchImage = async (word) => {
-    try {
-      const response = await fetch(IMAGE_API_ENDPOINT.replace(':word', word))
-      const data = await response.blob()
-
-      const imageUrl = URL.createObjectURL(data)
-      setImage(imageUrl)
-    } catch (error) {
-      // TODO: Handle error image
-    }
-  }
-
   // Fetch a cat fact on component mount
   useEffect(() => {
-    fetchFact().then(setFact)
+    getRandomFact()
   }, [])
-
-  // Recover the first word from the fact and fetch an image
-  useEffect(() => {
-    if (fact) {
-      const firstWord = recoverFirstWord(fact)
-      fetchImage(firstWord)
-    }
-  }, [fact])
 
   return (
     <main>
