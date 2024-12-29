@@ -13,10 +13,7 @@ export const useCatImage = ({ fact }) => {
 
   const fetchImage = async (word) => {
     try {
-      const response = await fetch(IMAGE_API_ENDPOINT.replace(':word', word))
-      const data = await response.blob()
-
-      const imageUrl = URL.createObjectURL(data)
+      const imageUrl = IMAGE_API_ENDPOINT.replace(':word', word)
       setImage(imageUrl)
     } catch (error) {
       // TODO: Handle error image
